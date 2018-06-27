@@ -1,0 +1,81 @@
+year,host,teams,placement_label,team,placement
+1930,Uruguay,13,winner,Uruguay,1
+1934,Italy,16,winner,Italy,1
+1938,France,15,winner,Italy,1
+1950,Brazil,13,winner,Uruguay,1
+1954,Switzerland,16,winner,Germany FR,1
+1958,Sweden,16,winner,Brazil,1
+1962,Chile,16,winner,Brazil,1
+1966,England,16,winner,England,1
+1970,Mexico,16,winner,Brazil,1
+1974,Germany,16,winner,Germany FR,1
+1978,Argentina,16,winner,Argentina,1
+1982,Spain,24,winner,Italy,1
+1986,Mexico,24,winner,Argentina,1
+1990,Italy,24,winner,Germany FR,1
+1994,USA,24,winner,Brazil,1
+1998,France,32,winner,France,1
+2002,Korea/Japan,32,winner,Brazil,1
+2006,Germany,32,winner,Italy,1
+2010,South Africa,32,winner,Spain,1
+2014,Brazil,32,winner,Germany,1
+1930,Uruguay,13,runner_up,Argentina,2
+1934,Italy,16,runner_up,Czechoslovakia,2
+1938,France,15,runner_up,Hungary,2
+1950,Brazil,13,runner_up,Brazil,2
+1954,Switzerland,16,runner_up,Hungary,2
+1958,Sweden,16,runner_up,Sweden,2
+1962,Chile,16,runner_up,Czechoslovakia,2
+1966,England,16,runner_up,Germany FR,2
+1970,Mexico,16,runner_up,Italy,2
+1974,Germany,16,runner_up,Netherlands,2
+1978,Argentina,16,runner_up,Netherlands,2
+1982,Spain,24,runner_up,Germany FR,2
+1986,Mexico,24,runner_up,Germany FR,2
+1990,Italy,24,runner_up,Argentina,2
+1994,USA,24,runner_up,Italy,2
+1998,France,32,runner_up,Brazil,2
+2002,Korea/Japan,32,runner_up,Germany,2
+2006,Germany,32,runner_up,France,2
+2010,South Africa,32,runner_up,Netherlands,2
+2014,Brazil,32,runner_up,Argentina,2
+1930,Uruguay,13,third,USA,3
+1934,Italy,16,third,Germany,3
+1938,France,15,third,Brazil,3
+1950,Brazil,13,third,Sweden,3
+1954,Switzerland,16,third,Austria,3
+1958,Sweden,16,third,France,3
+1962,Chile,16,third,Chile,3
+1966,England,16,third,Portugal,3
+1970,Mexico,16,third,Germany FR,3
+1974,Germany,16,third,Poland,3
+1978,Argentina,16,third,Brazil,3
+1982,Spain,24,third,Poland,3
+1986,Mexico,24,third,France,3
+1990,Italy,24,third,Italy,3
+1994,USA,24,third,Sweden,3
+1998,France,32,third,Croatia,3
+2002,Korea/Japan,32,third,Turkey,3
+2006,Germany,32,third,Germany,3
+2010,South Africa,32,third,Germany,3
+2014,Brazil,32,third,Netherlands,3
+1930,Uruguay,13,fourth,Yugoslavia,4
+1934,Italy,16,fourth,Austria,4
+1938,France,15,fourth,Sweden,4
+1950,Brazil,13,fourth,Spain,4
+1954,Switzerland,16,fourth,Uruguay,4
+1958,Sweden,16,fourth,Germany FR,4
+1962,Chile,16,fourth,Yugoslavia,4
+1966,England,16,fourth,Soviet Union,4
+1970,Mexico,16,fourth,Uruguay,4
+1974,Germany,16,fourth,Brazil,4
+1978,Argentina,16,fourth,Italy,4
+1982,Spain,24,fourth,France,4
+1986,Mexico,24,fourth,Belgium,4
+1990,Italy,24,fourth,England,4
+1994,USA,24,fourth,Bulgaria,4
+1998,France,32,fourth,Netherlands,4
+2002,Korea/Japan,32,fourth,Korea Republic,4
+2006,Germany,32,fourth,Portugal,4
+2010,South Africa,32,fourth,Uruguay,4
+2014,Brazil,32,fourth,Brazil,4

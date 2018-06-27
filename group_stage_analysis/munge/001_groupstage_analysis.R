@@ -40,6 +40,8 @@ wc.groupstage <- wc.matches %>%
   # dataset has many NA rows - remove these. 
   # we're only interested in group stage goals. 
   filter(!is.na(year), 
-        group_stage == TRUE)
+        group_stage == TRUE) %>%
+  
+  # remove intermediary columns 
+  select(-home_goals, -away_goals, -group_stage)
 
-knit("munge/002_worldcup_summary.rmd")

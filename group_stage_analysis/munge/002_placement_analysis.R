@@ -4,7 +4,7 @@ wc.summary.clean <- wc.summary %>%
     year = Year,
     host = Country,
     winner  = Winner, 
-    runner_up = Runners.Up,
+    runner_up = `Runners-Up`,
     third = Third,
     fourth = Fourth,
     teams = QualifiedTeams) %>%
