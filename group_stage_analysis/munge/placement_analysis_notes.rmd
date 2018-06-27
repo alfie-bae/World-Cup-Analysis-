@@ -1,0 +1,69 @@
+
+---
+title: "Worldcup Summary"
+output: html_document
+---
+
+
+## Overview 
+Initial dataset has every world cup from 1930-2014 as its entities 
+
+The data is in a wide-format with metrics for each world cup
+spread across the row as columns. 
+
+The desired output is a tidy('er') dataset of placements at each worldcup. 
+Where each row represents data about a 
+
+example: placement, placement label, team       
+          1          'winner'       'England' 
+
+## create Knittr namespace 
+
+For technical reasons to do with R namespaces,
+Knittr cannot use the objects that we've loaded already
+We'll need to load packages and set the glob-env once again.
+
+```{r message=FALSE, warning=FALSE, cache=FALSE}
+# load libs into Knitter's namespace
+wc.summary <- read.csv("../data/source_data/WorldCups.csv")
+library(dplyr)
+library(tidyr)
+```
+
+
+## Clean up of initial wc.summary data 
+```{r message=FALSE, warning=FALSE, cache=FALSE}
+wc.summary.clean <- wc.summary %>%
+  rename(
+    year = Year,
+    host = Country,
+    winner  = Winner, 
+    runner_up = Runners.Up,
+    third = Third,
+    fourth = Fourth,
+    teams = QualifiedTeams) %>%
+  select(year, host, teams, winner, runner_up, third, fourth) 
+  
+```
+
+
+## gathering wc.summary.clean into tidy format
+
+```{r message=FALSE, warning=FALSE, cache=FALSE}
+
+wc.summary.tidy <- wc.summary.clean %>%
+  # tidy dataset into placements at worldcups
+  gather('placement_label','team', 4:7) %>%
+  
+  # convert placement to a rank integer (1st...4th)
+  
+  mutate(placement = ifelse(placement_label == "winner", 1,
+                     ifelse(placement_label == 'runner_up', 2, 
+                     ifelse(placement_label == "third", 3, 4))))
+```
+
+
+
+
+  
+    
