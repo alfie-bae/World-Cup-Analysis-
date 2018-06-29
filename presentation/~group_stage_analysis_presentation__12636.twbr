@@ -1437,9 +1437,7 @@
     <dashboard name='Story 1' type='storyboard'>
       <layout-options>
         <title>
-          <formatted-text>
-            <run>Presentation overview&#10;</run>
-          </formatted-text>
+          <formatted-text />
         </title>
       </layout-options>
       <style />
@@ -1447,10 +1445,10 @@
       <zones>
         <zone h='100000' id='2' type='layout-basic' w='100000' x='0' y='0'>
           <zone h='98340' id='1' param='vert' removable='false' type='layout-flow' w='98426' x='787' y='830'>
-            <zone h='3423' id='3' type='title' w='98426' x='787' y='830' />
-            <zone h='10477' id='4' is-fixed='true' paired-zone-id='5' removable='false' type='flipboard-nav' w='98426' x='787' y='4253' />
-            <zone h='84440' id='5' paired-zone-id='4' removable='false' type='flipboard' w='98426' x='787' y='14730'>
-              <flipboard active-id='10' nav-type='caption' show-nav-arrows='true'>
+            <zone h='1037' id='3' type='title' w='98426' x='787' y='830' />
+            <zone h='10477' id='4' is-fixed='true' paired-zone-id='5' removable='false' type='flipboard-nav' w='98426' x='787' y='1867' />
+            <zone h='86826' id='5' paired-zone-id='4' removable='false' type='flipboard' w='98426' x='787' y='12344'>
+              <flipboard active-id='6' nav-type='caption' show-nav-arrows='true'>
                 <story-points>
                   <story-point caption='Title ' captured-sheet='Title DB' id='4'>
                     <capturedDeltas>
@@ -1750,10 +1748,10 @@
       </zones>
     </dashboard>
   </dashboards>
-  <windows source-height='51'>
-    <window class='dashboard' name='Story 1'>
+  <windows pres-mode='true' source-height='51'>
+    <window class='dashboard' maximized='true' name='Story 1'>
       <viewpoints />
-      <active id='5' />
+      <active id='-1' />
     </window>
     <window class='dashboard' name='Title DB'>
       <viewpoints />
@@ -1783,7 +1781,7 @@
       <viewpoints />
       <active id='1' />
     </window>
-    <window class='worksheet' maximized='true' name='points_total_spread'>
+    <window class='worksheet' name='points_total_spread'>
       <cards>
         <edge name='left'>
           <strip size='160'>

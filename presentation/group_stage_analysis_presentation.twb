@@ -2089,7 +2089,7 @@
       <viewpoints />
       <active id='-1' />
     </window>
-    <window class='dashboard' name='limitations'>
+    <window class='dashboard' maximized='true' name='limitations'>
       <viewpoints />
       <active id='-1' />
     </window>
@@ -2097,7 +2097,7 @@
       <viewpoints />
       <active id='-1' />
     </window>
-    <window class='dashboard' maximized='true' name='acknowledgements'>
+    <window class='dashboard' name='acknowledgements'>
       <viewpoints />
       <active id='-1' />
     </window>
