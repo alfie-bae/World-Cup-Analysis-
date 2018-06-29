@@ -1,0 +1,185 @@
+---
+title: "Groupstage Processing"
+author: "Alfie Smith"
+date: "28 June 2018"
+output: html_document
+---
+
+##Overview 
+
+The aim of this script is to convert match-day summaries 
+into group-stage results for each team. 
+
+Packages required
+
+* dplyr
+* tidyr
+* readr
+* lubridate
+* knitr
+
+Input details: 
+
+* variable name: wc.matches 
+* source file: WorldcupMatches.csv 
+* fields: home team, away team, home goals, away goals, stage...
+
+Output details:
+
+* variable name: wc.groupstage.totals  
+* fields: goals scored, goals conceded, group position...
+* output file: wc_groupstage.csv
+
+# Processing
+
+## create Knittr namespace 
+For technical reasons to do with R namespaces,
+Knittr cannot access the objects in the general R-session. 
+We'll need to all load packages and data into memory once again.
+
+```{r message=FALSE, warning=FALSE, cache=FALSE}
+# load libs into Knitter's namespace
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# load source data
+wc.matches <- read_csv("../data/source_data/WorldCupMatches.csv")
+
+```
+
+## Part 1: clean data and gather into teams 
+
+This processing step renames most of the original columns
+to a standardised format (no spaces, lower case)
+
+Filter only the columns that are relevant to this analysis
+
+Convert data from wide format where the rows contain 
+both home and away team data to a tidy format 
+containing data about only one team.
+
+This last step is critical to rolling up group
+stage results per team. 
+
+```{r setup, message=FALSE, warning=FALSE, cache=FALSE}
+
+wc.groupstage.tidy <- wc.matches %>%
+  dplyr::rename(year = Year,
+         date = Datetime,
+         stage = Stage, 
+         home = `Home Team Name`,
+         away = `Away Team Name`,
+         home_goals = `Home Team Goals`,
+         away_goals = `Away Team Goals`) %>%
+  select(year, date, stage, home, away, home_goals, away_goals) %>%
+  
+  # convert wide per match data format to skinny per team format. 
+  gather("where", "team", c(home, away)) 
+```
+
+## Part 2: Calculate new fields 
+
+The source data contains match level summaries that do not 
+assign particular values to each team. 
+
+This processing step introduces the concepts of win, lose and draw.
+
+In addition to introducing results, this step
+also converts home and away goals to goals scored and conceded. 
+
+Furthermore, I've created a new binary classifier for group stage matches
+This is used at the end of the step to remove non-group stage games. 
+
+
+```{r message=FALSE, warning=FALSE, cache=FALSE}
+wc.groupstage.results <- wc.groupstage.tidy %>% 
+  # Create new fields: calc per team metrics from match level metrics
+  mutate(
+        # work out from goals for vs agaist who won the match
+        # assign points so we can compare track records. 
+        result =  ifelse(  (where == "home" & home_goals > away_goals)|
+                            (where == "away" & away_goals > home_goals), 3,
+                            ifelse(home_goals==away_goals, 1,
+                            0)),
+         
+         # assign goals per team rather than by match. 
+         goals_scored = ifelse(where=="home", home_goals, away_goals),
+         goals_conceded = ifelse(where=="home", away_goals, home_goals),
+         
+         # label whether a match was in group stage or not.
+         
+         group_stage = ifelse(grepl("Group", stage),TRUE, FALSE)) %>%
+  # dataset has many NA rows - remove these. 
+  # we're only interested in group stage goals. 
+  filter(!is.na(year), 
+        group_stage == TRUE) 
+```
+
+# Part 3 summarising group results 
+
+This step produces our final product - 
+
+Remove the source and intermediary columns that are not longer required. 
+For each team, at each world cup, 
+
+Summarise points and goals scored/conceded for whole group stage. 
+Using these totals, rank each teams performance relative to their each group. 
+
+```{r message=FALSE, warning=FALSE, cache=FALSE}
+
+wc.groupstage.totals <- wc.groupstage.results %>%
+  # remove intermediary columns 
+  select(-home_goals, -away_goals, -group_stage) %>%
+  group_by(team, year) %>%
+  summarise(points_total = sum(result),
+            goals_scored = sum(goals_scored),
+            goals_conceded = sum(goals_conceded),
+            group_name = first(stage)) %>%
+  ungroup() %>%
+  group_by(year, group_name) %>%
+  # rank teams within group by points total
+  # tiny but effective hack -(points total) instead of desc (not working)
+  arrange(year, group_name, -(points_total)) %>%
+  mutate(rank=row_number()) %>%
+  # repeat lines 143-144 for goals scored and conceded
+  arrange(year, group_name, -(goals_scored)) %>%
+  mutate(goals_scored_rank = row_number()) %>%
+  arrange(year, group_name, goals_conceded) %>%
+  mutate(goals_conceded_rank = row_number()) 
+  
+  
+```
+
+# Notes from processing 
+
+## Missing data  
+We're missing group stage data from the 1934-1938 world cups 
+because there were no group stages. These tournaments were 16 teams
+only due to some countries refusal to participate in Spainish and Italian WC.
+
+We're missing worldcup data from 1942 and 1946 due to the outbreak
+of WW2 causing the cup to be cancelled. 
+
+## Nulls in original data set
+
+There are several thousand null rows in worldcupmatches.csv 
+due to an additional comma at the end of the file. 
+Instead of removing this manually and created a new source data 
+file, I've allowed these rows to be created and filtered them out. 
+
+## > 9 points in some group stages.
+
+The custom for 3 group games has been a standard since 1990 world cup. 
+This would lead to a maximum of 9 group stage points.
+
+However, this doesn't hold over the whole time period sampled. 
+The 1950 world cup had 3 groups of 6 
+Both the 1982 and 1986 world cups operated a second round-robin group-stage 
+
+This inconsistency in maximum points led me to use points ranking 
+rather than points total to compare group stage perfomances over time. 
+
+
+
+

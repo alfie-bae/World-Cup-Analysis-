@@ -1,0 +1,119 @@
+
+---
+title: "Placement Processing Notes"
+output: html_document
+---
+
+
+## Overview 
+Initial dataset has every world cup from 1930-2014 as its entities 
+
+The data is in a wide-format with metrics for each world cup
+spread across the row as columns. 
+
+The desired output is a tidy('er') dataset of placements at each worldcup. 
+Where each row represents a placement at a given world cup. 
+For example 'Germany 2014 Winner'. 
+
+Packages required
+
+* dplyr
+* tidyr
+* readr
+* lubridate
+* knitr
+
+Input details: 
+
+* variable name: wc.summary
+* source file: WorldCups.csv 
+* fields: "Year","Country", "Winner","Runners.Up", "Third" 
+
+Output details:
+
+* variable name: wc.summary.tidy
+* fields: "team", "year", "placement", "placement_label", "host"
+* output file: wc_placements.csv
+
+# Processsing 
+
+
+
+## Preliminary step: create Knittr namespace 
+For technical reasons to do with R namespaces,
+Knittr cannot use the objects that we've loaded into 
+the R session previously. 
+
+We'll need to load all packages again in memory. 
+
+```{r message=FALSE, warning=FALSE, cache=FALSE}
+# load libs into Knitter's namespace
+wc.summary <- read.csv("../data/source_data/WorldCups.csv")
+library(dplyr)
+library(tidyr)
+```
+
+
+## Part 1: Clean up of initial wc.summary data 
+
+This section simply renames the columns to my standardised format
+(no spaces or caps) and filters out the columns that aren't of
+interest to this analysis. 
+
+```{r message=FALSE, warning=FALSE, cache=FALSE}
+wc.summary.clean <- wc.summary %>%
+  rename(
+    year = Year,
+    host = Country,
+    winner  = Winner, 
+    runner_up = Runners.Up,
+    third = Third,
+    fourth = Fourth,
+    teams = QualifiedTeams) %>%
+  select(year, host, teams, winner, runner_up, third, fourth) 
+  
+```
+
+
+## Part 2: gathering wc.summary.clean into tidy format
+
+This section takes the placement data spread out of several columns, 
+(winner, runner up, third, fourth) and gathers it 
+into two new columns called 'team' and 'placement label'.
+
+I've also created a numeric version of the placement label variable
+where the label 'winner' is converted to a rank '1', which represents 1st. 
+
+```{r message=FALSE, warning=FALSE, cache=FALSE}
+
+wc.summary.tidy <- wc.summary.clean %>%
+  # tidy dataset into placements at worldcups
+  gather('placement_label','team', 4:7) %>%
+  
+  # convert placement to a rank integer (1st...4th)
+  
+  mutate(placement = ifelse(placement_label == "winner", 1,
+                     ifelse(placement_label == 'runner_up', 2, 
+                     ifelse(placement_label == "third", 3, 4))))
+```
+
+
+# Notes from processing 
+
+## Third awarded to both semi-finalists
+
+The third place play off was introduced in 1970 
+world cup. Before this date, both semi-finalists
+were treated as 3/4th place finishers. 
+The source data writer chose third based on 
+goal difference and I've stuck with that rule. 
+
+
+
+
+Script end. 
+
+
+
+  
+    

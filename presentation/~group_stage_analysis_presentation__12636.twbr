@@ -1,0 +1,2040 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20181.18.0615.1128                               -->
+<workbook source-build='2018.1.2 (20181.18.0615.1128)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource hasconnection='false' inline='true' name='Parameters' version='18.1'>
+      <aliases enabled='yes' />
+      <column caption='average points' datatype='real' name='[Parameter 1]' param-domain-type='any' role='measure' type='quantitative' value='1.0'>
+        <calculation class='tableau' formula='1.0' />
+      </column>
+    </datasource>
+    <datasource caption='wc_groupstage' inline='true' name='federated.1294f5c0yw0hlq1fwn92607v3spa' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='wc_groupstage' name='textscan.05yjof41y21nc31fe58rn00sgwum'>
+            <connection class='textscan' directory='C:/Users/Alfie/git_repos/World-Cup-Analysis-/group_stage_analysis/data/products' filename='wc_groupstage.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='wc_placements' name='textscan.0fblab018vnaz819x0bcr1izw6ko'>
+            <connection class='textscan' directory='C:/Users/Alfie/git_repos/World-Cup-Analysis-/group_stage_analysis/data/products' filename='wc_placements.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='WorldCups' name='textscan.0tzwhon1n6ghli18vc7sq09mf5or'>
+            <connection class='textscan' directory='C:/Users/Alfie/git_repos/World-Cup-Analysis-/group_stage_analysis/data/source_data' filename='WorldCups.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='WorldCupMatches' name='textscan.01rsqpa0fxi6ah16mtuad06zix0x'>
+            <connection class='textscan' directory='C:/Users/Alfie/git_repos/World-Cup-Analysis-/group_stage_analysis/data/source_data' filename='WorldCupMatches.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation join='left' type='join'>
+          <clause type='join'>
+            <expression op='AND'>
+              <expression op='='>
+                <expression op='[wc_groupstage.csv].[year]' />
+                <expression op='[wc_placements.csv].[year]' />
+              </expression>
+              <expression op='='>
+                <expression op='[wc_groupstage.csv].[team]' />
+                <expression op='[wc_placements.csv].[team]' />
+              </expression>
+            </expression>
+          </clause>
+          <relation connection='textscan.05yjof41y21nc31fe58rn00sgwum' name='wc_groupstage.csv' table='[wc_groupstage#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='integer' name='year' ordinal='0' />
+              <column datatype='string' name='date' ordinal='1' />
+              <column datatype='string' name='stage' ordinal='2' />
+              <column datatype='string' name='where' ordinal='3' />
+              <column datatype='string' name='team' ordinal='4' />
+              <column datatype='integer' name='result' ordinal='5' />
+              <column datatype='integer' name='goals_scored' ordinal='6' />
+              <column datatype='integer' name='goals_conceded' ordinal='7' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0fblab018vnaz819x0bcr1izw6ko' name='wc_placements.csv' table='[wc_placements#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='integer' name='year' ordinal='0' />
+              <column datatype='string' name='host' ordinal='1' />
+              <column datatype='integer' name='teams' ordinal='2' />
+              <column datatype='string' name='placement_label' ordinal='3' />
+              <column datatype='string' name='team' ordinal='4' />
+              <column datatype='integer' name='placement' ordinal='5' />
+            </columns>
+          </relation>
+        </relation>
+        <cols>
+          <map key='[date]' value='[wc_groupstage.csv].[date]' />
+          <map key='[goals_conceded]' value='[wc_groupstage.csv].[goals_conceded]' />
+          <map key='[goals_scored]' value='[wc_groupstage.csv].[goals_scored]' />
+          <map key='[host]' value='[wc_placements.csv].[host]' />
+          <map key='[placement]' value='[wc_placements.csv].[placement]' />
+          <map key='[placement_label]' value='[wc_placements.csv].[placement_label]' />
+          <map key='[result]' value='[wc_groupstage.csv].[result]' />
+          <map key='[stage]' value='[wc_groupstage.csv].[stage]' />
+          <map key='[team (wc_placements.csv)]' value='[wc_placements.csv].[team]' />
+          <map key='[team]' value='[wc_groupstage.csv].[team]' />
+          <map key='[teams]' value='[wc_placements.csv].[teams]' />
+          <map key='[where]' value='[wc_groupstage.csv].[where]' />
+          <map key='[year (wc_placements.csv)]' value='[wc_placements.csv].[year]' />
+          <map key='[year]' value='[wc_groupstage.csv].[year]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;£&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>year</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[year]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>year</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>date</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[date]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>date</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>stage</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[stage]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>stage</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>where</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[where]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>where</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>team</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[team]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>team</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>result</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[result]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>result</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>goals_scored</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[goals_scored]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>goals_scored</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>goals_conceded</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[goals_conceded]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>goals_conceded</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[wc_placements.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;£&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>year</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[year (wc_placements.csv)]</local-name>
+            <parent-name>[wc_placements.csv]</parent-name>
+            <remote-alias>year</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>host</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[host]</local-name>
+            <parent-name>[wc_placements.csv]</parent-name>
+            <remote-alias>host</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>teams</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[teams]</local-name>
+            <parent-name>[wc_placements.csv]</parent-name>
+            <remote-alias>teams</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>placement_label</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[placement_label]</local-name>
+            <parent-name>[wc_placements.csv]</parent-name>
+            <remote-alias>placement_label</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>team</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[team (wc_placements.csv)]</local-name>
+            <parent-name>[wc_placements.csv]</parent-name>
+            <remote-alias>team</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>placement</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[placement]</local-name>
+            <parent-name>[wc_placements.csv]</parent-name>
+            <remote-alias>placement</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='placement_augmented' datatype='string' name='[Calculation_889179465273741312]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IF(ISNULL([placement_label])==TRUE) THEN &quot;Not Ranked&quot; &#13;&#10;ELSE [placement_label] END' />
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Date' datatype='string' name='[date]' role='dimension' type='nominal' />
+      <column caption='Goals Conceded' datatype='integer' name='[goals_conceded]' role='measure' type='quantitative' />
+      <column caption='Goals Scored' datatype='integer' name='[goals_scored]' role='measure' type='quantitative' />
+      <column caption='Host' datatype='string' name='[host]' role='dimension' type='nominal' />
+      <column caption='Placement' datatype='integer' name='[placement]' role='measure' type='quantitative' />
+      <column caption='Placement Label' datatype='string' name='[placement_label]' role='dimension' type='nominal' />
+      <column caption='Result' datatype='integer' name='[result]' role='measure' type='quantitative' />
+      <column caption='Stage' datatype='string' name='[stage]' role='dimension' type='nominal' />
+      <column caption='Team (Wc Placements.Csv)' datatype='string' name='[team (wc_placements.csv)]' role='dimension' type='nominal' />
+      <column caption='Team' datatype='string' name='[team]' role='dimension' type='nominal' />
+      <column caption='Teams' datatype='integer' name='[teams]' role='measure' type='quantitative' />
+      <column caption='Where' datatype='string' name='[where]' role='dimension' type='nominal' />
+      <column caption='Year (Wc Placements.Csv)' datatype='integer' name='[year (wc_placements.csv)]' role='dimension' type='quantitative' />
+      <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.301099' measure-ordering='alphabetic' measure-percentage='0.531868' parameter-percentage='0.167033' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Reino Unido&quot;' />
+      </semantic-values>
+      <date-options start-of-week='monday' />
+      <field-sort-info field-sort-order-type='custom-order'>
+        <field-sort-custom-order field='year' />
+        <field-sort-custom-order field='date' />
+        <field-sort-custom-order field='stage' />
+        <field-sort-custom-order field='where' />
+        <field-sort-custom-order field='team' />
+        <field-sort-custom-order field='result' />
+        <field-sort-custom-order field='goals_scored' />
+        <field-sort-custom-order field='goals_conceded' />
+        <field-sort-custom-order field='year (wc_placements.csv)' />
+        <field-sort-custom-order field='host' />
+        <field-sort-custom-order field='teams' />
+        <field-sort-custom-order field='placement_label' />
+        <field-sort-custom-order field='team (wc_placements.csv)' />
+        <field-sort-custom-order field='Calculation_889179465273741312' />
+        <field-sort-custom-order field='placement' />
+      </field-sort-info>
+    </datasource>
+    <datasource caption='WorldCups' inline='true' name='federated.05bmbjy0hzogc816c75si07m7xz0' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='wc_placements' name='textscan.1kw8tor0p5l76116ss99m0f4gnak'>
+            <connection class='textscan' directory='C:/Users/Alfie/git_repos/World-Cup-Analysis-/group_stage_analysis/data/products' filename='wc_placements.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='wc_groupstage' name='textscan.0lz4k921alkh021gtjrpb1iol1l8'>
+            <connection class='textscan' directory='C:/Users/Alfie/git_repos/World-Cup-Analysis-/group_stage_analysis/data/products' filename='wc_groupstage.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation join='left' type='join'>
+          <clause type='join'>
+            <expression op='AND'>
+              <expression op='='>
+                <expression op='[wc_groupstage.csv].[team]' />
+                <expression op='[wc_placements.csv].[team]' />
+              </expression>
+              <expression op='='>
+                <expression op='[wc_groupstage.csv].[year]' />
+                <expression op='[wc_placements.csv].[year]' />
+              </expression>
+            </expression>
+          </clause>
+          <relation connection='textscan.0lz4k921alkh021gtjrpb1iol1l8' name='wc_groupstage.csv' table='[wc_groupstage#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='string' name='team' ordinal='0' />
+              <column datatype='integer' name='year' ordinal='1' />
+              <column datatype='integer' name='points_total' ordinal='2' />
+              <column datatype='integer' name='goals_scored' ordinal='3' />
+              <column datatype='integer' name='goals_conceded' ordinal='4' />
+              <column datatype='string' name='group_name' ordinal='5' />
+              <column datatype='integer' name='rank' ordinal='6' />
+              <column datatype='integer' name='goals_scored_rank' ordinal='7' />
+              <column datatype='integer' name='goals_conceded_rank' ordinal='8' />
+            </columns>
+          </relation>
+          <relation connection='textscan.1kw8tor0p5l76116ss99m0f4gnak' name='wc_placements.csv' table='[wc_placements#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_GB' separator=','>
+              <column datatype='integer' name='year' ordinal='0' />
+              <column datatype='string' name='host' ordinal='1' />
+              <column datatype='integer' name='teams' ordinal='2' />
+              <column datatype='string' name='placement_label' ordinal='3' />
+              <column datatype='string' name='team' ordinal='4' />
+              <column datatype='integer' name='placement' ordinal='5' />
+            </columns>
+          </relation>
+        </relation>
+        <cols>
+          <map key='[goals_conceded]' value='[wc_groupstage.csv].[goals_conceded]' />
+          <map key='[goals_conceded_rank]' value='[wc_groupstage.csv].[goals_conceded_rank]' />
+          <map key='[goals_scored]' value='[wc_groupstage.csv].[goals_scored]' />
+          <map key='[goals_scored_rank]' value='[wc_groupstage.csv].[goals_scored_rank]' />
+          <map key='[group_name]' value='[wc_groupstage.csv].[group_name]' />
+          <map key='[host]' value='[wc_placements.csv].[host]' />
+          <map key='[placement]' value='[wc_placements.csv].[placement]' />
+          <map key='[placement_label]' value='[wc_placements.csv].[placement_label]' />
+          <map key='[points_total]' value='[wc_groupstage.csv].[points_total]' />
+          <map key='[rank]' value='[wc_groupstage.csv].[rank]' />
+          <map key='[team (wc_placements.csv)]' value='[wc_placements.csv].[team]' />
+          <map key='[team]' value='[wc_groupstage.csv].[team]' />
+          <map key='[teams]' value='[wc_placements.csv].[teams]' />
+          <map key='[year (wc_placements.csv)]' value='[wc_placements.csv].[year]' />
+          <map key='[year]' value='[wc_groupstage.csv].[year]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;£&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>team</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[team]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>team</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>year</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[year]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>year</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>points_total</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[points_total]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>points_total</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>goals_scored</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[goals_scored]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>goals_scored</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>goals_conceded</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[goals_conceded]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>goals_conceded</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>group_name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[group_name]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>group_name</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>rank</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[rank]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>rank</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>goals_scored_rank</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[goals_scored_rank]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>goals_scored_rank</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>goals_conceded_rank</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[goals_conceded_rank]</local-name>
+            <parent-name>[wc_groupstage.csv]</parent-name>
+            <remote-alias>goals_conceded_rank</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[wc_placements.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;£&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>year</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[year (wc_placements.csv)]</local-name>
+            <parent-name>[wc_placements.csv]</parent-name>
+            <remote-alias>year</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>host</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[host]</local-name>
+            <parent-name>[wc_placements.csv]</parent-name>
+            <remote-alias>host</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>teams</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[teams]</local-name>
+            <parent-name>[wc_placements.csv]</parent-name>
+            <remote-alias>teams</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>placement_label</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[placement_label]</local-name>
+            <parent-name>[wc_placements.csv]</parent-name>
+            <remote-alias>placement_label</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>team</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[team (wc_placements.csv)]</local-name>
+            <parent-name>[wc_placements.csv]</parent-name>
+            <remote-alias>team</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>placement</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[placement]</local-name>
+            <parent-name>[wc_placements.csv]</parent-name>
+            <remote-alias>placement</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='placement_adjusted' datatype='string' name='[Calculation_889179465322008577]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IF (ISNULL([placement_label]))&#13;&#10;THEN &quot;No Rank&quot; &#13;&#10;ELSE [placement_label] END' />
+      </column>
+      <column caption='Winners' datatype='string' name='[Calculation_889179465331826693]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IF ([placement_label] == &quot;winner&quot;) THEN &quot;winner&quot; ELSE &quot;loser&quot; END' />
+      </column>
+      <column caption='Goals Conceded' datatype='integer' name='[goals_conceded]' role='measure' type='quantitative' />
+      <column caption='Goals Scored' datatype='integer' name='[goals_scored]' role='measure' type='quantitative' />
+      <column caption='Group Name' datatype='string' name='[group_name]' role='dimension' type='nominal' />
+      <column caption='Host' datatype='string' hidden='true' name='[host]' role='dimension' type='nominal' />
+      <column caption='Placement' datatype='integer' name='[placement]' role='measure' type='quantitative' />
+      <column caption='Placement Label' datatype='string' name='[placement_label]' role='dimension' type='nominal' />
+      <column caption='Points Total' datatype='integer' name='[points_total]' role='measure' type='quantitative' />
+      <column caption='Rank' datatype='integer' name='[rank]' role='measure' type='quantitative' />
+      <column caption='Team (Wc Placements.Csv)' datatype='string' name='[team (wc_placements.csv)]' role='dimension' type='nominal' />
+      <column caption='Team' datatype='string' name='[team]' role='dimension' type='nominal' />
+      <column caption='Teams' datatype='integer' hidden='true' name='[teams]' role='measure' type='quantitative' />
+      <column caption='Year (Wc Placements.Csv)' datatype='integer' hidden='true' name='[year (wc_placements.csv)]' role='dimension' type='quantitative' />
+      <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
+      <column-instance column='[Calculation_889179465331826693]' derivation='None' name='[none:Calculation_889179465331826693:nk]' pivot='key' type='nominal' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.47033' measure-ordering='alphabetic' measure-percentage='0.47033' parameter-percentage='0.0593407' show-aliased-fields='true' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='shape' field='[none:Calculation_889179465331826693:nk]' palette=':default' type='shape'>
+            <map to='circle'>
+              <bucket>&quot;loser&quot;</bucket>
+            </map>
+            <map to='times'>
+              <bucket>&quot;winner&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Reino Unido&quot;' />
+      </semantic-values>
+      <date-options start-of-week='monday' />
+      <field-sort-info field-sort-order-type='custom-order'>
+        <field-sort-custom-order field='year' />
+        <field-sort-custom-order field='date' />
+        <field-sort-custom-order field='stage' />
+        <field-sort-custom-order field='where' />
+        <field-sort-custom-order field='team' />
+        <field-sort-custom-order field='result' />
+        <field-sort-custom-order field='goals_scored' />
+        <field-sort-custom-order field='goals_conceded' />
+        <field-sort-custom-order field='year (wc_placements.csv)' />
+        <field-sort-custom-order field='host' />
+        <field-sort-custom-order field='teams' />
+        <field-sort-custom-order field='placement_label' />
+        <field-sort-custom-order field='Calculation_889179465322008577' />
+        <field-sort-custom-order field='team (wc_placements.csv)' />
+        <field-sort-custom-order field='placement' />
+      </field-sort-info>
+    </datasource>
+  </datasources>
+  <actions>
+    <action caption='Highlight 1 (generated)' name='[Action1]'>
+      <activation auto-clear='true' type='on-select' />
+      <source type='sheet' worksheet='points_rank' />
+      <command command='tsc:brush'>
+        <param name='field-captions' value='Team' />
+        <param name='target' value='points_rank' />
+      </command>
+    </action>
+    <action caption='Highlight 1 (generated) 1' name='[Action2]'>
+      <activation auto-clear='true' type='on-select' />
+      <source type='sheet' worksheet='scored rank' />
+      <command command='tsc:brush'>
+        <param name='field-captions' value='Team' />
+        <param name='target' value='scored rank' />
+      </command>
+    </action>
+    <action caption='Highlight 1 (generated) 1 1' name='[Action3]'>
+      <activation auto-clear='true' type='on-select' />
+      <source type='sheet' worksheet='conceded rank' />
+      <command command='tsc:brush'>
+        <param name='field-captions' value='Team' />
+        <param name='target' value='conceded rank' />
+      </command>
+    </action>
+  </actions>
+  <worksheets>
+    <worksheet name='conceded rank'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Group Stage Conceded Ranking </run>
+          </formatted-text>
+        </title>
+        <caption>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana' fontsize='10'>Most world cup winners conceded the fewest goals within their group. </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana' fontsize='10'>However, there&apos;s a much greater spread than found between goals-scored/points and winning the cup. </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana' fontsize='10'>Again, this could also reflect a confounding relationship with goals-scored and points as all three are casually related. </run>
+          </formatted-text>
+        </caption>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='WorldCups' name='federated.05bmbjy0hzogc816c75si07m7xz0' />
+          </datasources>
+          <datasource-dependencies datasource='federated.05bmbjy0hzogc816c75si07m7xz0'>
+            <column caption='Winners' datatype='string' name='[Calculation_889179465331826693]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF ([placement_label] == &quot;winner&quot;) THEN &quot;winner&quot; ELSE &quot;loser&quot; END' />
+            </column>
+            <column datatype='integer' name='[goals_conceded_rank]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_889179465331826693]' derivation='None' name='[none:Calculation_889179465331826693:nk]' pivot='key' type='nominal' />
+            <column-instance column='[team]' derivation='None' name='[none:team:nk]' pivot='key' type='nominal' />
+            <column-instance column='[year]' derivation='None' name='[none:year:qk]' pivot='key' type='quantitative' />
+            <column caption='Placement Label' datatype='string' name='[placement_label]' role='dimension' type='nominal' />
+            <column-instance column='[goals_conceded_rank]' derivation='Sum' name='[sum:goals_conceded_rank:qk]' pivot='key' type='quantitative' />
+            <column caption='Team' datatype='string' name='[team]' role='dimension' type='nominal' />
+            <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.05bmbjy0hzogc816c75si07m7xz0].[sum:goals_conceded_rank:qk]' field-type='quantitative' reverse='true' scope='rows' type='space' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:team:nk]' />
+              <size column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.05bmbjy0hzogc816c75si07m7xz0].[sum:goals_conceded_rank:qk]</rows>
+        <cols>[federated.05bmbjy0hzogc816c75si07m7xz0].[none:year:qk]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='conceded spread'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Group Stage Goals Conceded&#10;</run>
+          </formatted-text>
+        </title>
+        <caption>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana' fontsize='10'>The weakest relationship so far is between fewest goals conceded and winning the cup. </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana' fontsize='10'>While the same percentage as goals scored won their cup (17%),far fewer winners were in the &apos;top three&apos; lowest scorers in their tournament. </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana' fontsize='10'>We also see high conceders like Germany (1954) and Italy (1982) winning the cup</run>
+            <run>Æ&#10;</run>
+          </formatted-text>
+        </caption>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='WorldCups' name='federated.05bmbjy0hzogc816c75si07m7xz0' />
+          </datasources>
+          <datasource-dependencies datasource='federated.05bmbjy0hzogc816c75si07m7xz0'>
+            <column caption='Winners' datatype='string' name='[Calculation_889179465331826693]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF ([placement_label] == &quot;winner&quot;) THEN &quot;winner&quot; ELSE &quot;loser&quot; END' />
+            </column>
+            <column caption='Goals Conceded' datatype='integer' name='[goals_conceded]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_889179465331826693]' derivation='None' name='[none:Calculation_889179465331826693:nk]' pivot='key' type='nominal' />
+            <column-instance column='[team]' derivation='None' name='[none:team:nk]' pivot='key' type='nominal' />
+            <column-instance column='[year]' derivation='None' name='[none:year:qk]' pivot='key' type='quantitative' />
+            <column caption='Placement Label' datatype='string' name='[placement_label]' role='dimension' type='nominal' />
+            <column-instance column='[goals_conceded]' derivation='Sum' name='[sum:goals_conceded:qk]' pivot='key' type='quantitative' />
+            <column caption='Team' datatype='string' name='[team]' role='dimension' type='nominal' />
+            <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.05bmbjy0hzogc816c75si07m7xz0].[sum:goals_conceded:qk]' field-type='quantitative' reverse='true' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='size' field='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' field-type='nominal' max-size='1' min-size='0.139153' type='catsize' />
+          </style-rule>
+          <style-rule element='refline'>
+            <format attr='fill-above' id='refline0' value='#00000000' />
+            <format attr='fill-below' id='refline0' value='#00000000' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:team:nk]' />
+              <size column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+                <format attr='size' value='1.4892762899398804' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.05bmbjy0hzogc816c75si07m7xz0].[sum:goals_conceded:qk]</rows>
+        <cols>[federated.05bmbjy0hzogc816c75si07m7xz0].[none:year:qk]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='points_rank'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Group Stage Ranking </run>
+          </formatted-text>
+        </title>
+        <caption>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>This plot shows the points position (1-5) for each team. </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>Y-axis inverted to show 1st (most points in group) at the top of the scale </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>Apart from 2010, every cup winner topped their group. </run>
+          </formatted-text>
+        </caption>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='WorldCups' name='federated.05bmbjy0hzogc816c75si07m7xz0' />
+          </datasources>
+          <datasource-dependencies datasource='federated.05bmbjy0hzogc816c75si07m7xz0'>
+            <column caption='Winners' datatype='string' name='[Calculation_889179465331826693]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF ([placement_label] == &quot;winner&quot;) THEN &quot;winner&quot; ELSE &quot;loser&quot; END' />
+            </column>
+            <column-instance column='[Calculation_889179465331826693]' derivation='None' name='[none:Calculation_889179465331826693:nk]' pivot='key' type='nominal' />
+            <column-instance column='[team]' derivation='None' name='[none:team:nk]' pivot='key' type='nominal' />
+            <column-instance column='[year]' derivation='None' name='[none:year:qk]' pivot='key' type='quantitative' />
+            <column caption='Placement Label' datatype='string' name='[placement_label]' role='dimension' type='nominal' />
+            <column caption='Rank' datatype='integer' name='[rank]' role='measure' type='quantitative' />
+            <column-instance column='[rank]' derivation='Sum' name='[sum:rank:qk]' pivot='key' type='quantitative' />
+            <column caption='Team' datatype='string' name='[team]' role='dimension' type='nominal' />
+            <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' domain-expand='false' field='[federated.05bmbjy0hzogc816c75si07m7xz0].[sum:rank:qk]' field-type='quantitative' reverse='true' scope='rows' type='space' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:team:nk]' />
+              <size column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.05bmbjy0hzogc816c75si07m7xz0].[sum:rank:qk]</rows>
+        <cols>[federated.05bmbjy0hzogc816c75si07m7xz0].[none:year:qk]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='points_total_spread'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Group Stage Total Points</run>
+          </formatted-text>
+        </title>
+        <caption>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana' fontsize='10'>This diagram shows the total number of group-stage points earned by each team. </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana' fontsize='10'>You can see that group winners tend to get the most points at the group stage and are always in the top 3. </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana' fontsize='10'>This seems to lend support to the argument that winning a group is important for winning the cup. </run>
+          </formatted-text>
+        </caption>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='WorldCups' name='federated.05bmbjy0hzogc816c75si07m7xz0' />
+          </datasources>
+          <datasource-dependencies datasource='federated.05bmbjy0hzogc816c75si07m7xz0'>
+            <column caption='Winners' datatype='string' name='[Calculation_889179465331826693]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF ([placement_label] == &quot;winner&quot;) THEN &quot;winner&quot; ELSE &quot;loser&quot; END' />
+            </column>
+            <column-instance column='[Calculation_889179465331826693]' derivation='None' name='[none:Calculation_889179465331826693:nk]' pivot='key' type='nominal' />
+            <column-instance column='[team]' derivation='None' name='[none:team:nk]' pivot='key' type='nominal' />
+            <column-instance column='[year]' derivation='None' name='[none:year:qk]' pivot='key' type='quantitative' />
+            <column caption='Placement Label' datatype='string' name='[placement_label]' role='dimension' type='nominal' />
+            <column caption='Points Total' datatype='integer' name='[points_total]' role='measure' type='quantitative' />
+            <column-instance column='[points_total]' derivation='Sum' name='[sum:points_total:qk]' pivot='key' type='quantitative' />
+            <column caption='Team' datatype='string' name='[team]' role='dimension' type='nominal' />
+            <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='size' field='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' field-type='nominal' max-size='1' min-size='0.139153' type='catsize' />
+          </style-rule>
+          <style-rule element='refline'>
+            <format attr='fill-above' id='refline0' value='#00000000' />
+            <format attr='fill-below' id='refline0' value='#00000000' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:team:nk]' />
+              <size column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+                <format attr='size' value='1.4892762899398804' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.05bmbjy0hzogc816c75si07m7xz0].[sum:points_total:qk]</rows>
+        <cols>[federated.05bmbjy0hzogc816c75si07m7xz0].[none:year:qk]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='scored rank'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Group Stage Scored Ranking </run>
+          </formatted-text>
+        </title>
+        <caption>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>Teams that win the world cup tend to score the most goals within their group. </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>There&apos;s probably a confounding relationship between this trend and the trend between group winners to cup winners. </run>
+            <run>Æ&#10;</run>
+          </formatted-text>
+        </caption>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='WorldCups' name='federated.05bmbjy0hzogc816c75si07m7xz0' />
+          </datasources>
+          <datasource-dependencies datasource='federated.05bmbjy0hzogc816c75si07m7xz0'>
+            <column caption='Winners' datatype='string' name='[Calculation_889179465331826693]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF ([placement_label] == &quot;winner&quot;) THEN &quot;winner&quot; ELSE &quot;loser&quot; END' />
+            </column>
+            <column datatype='integer' name='[goals_scored_rank]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_889179465331826693]' derivation='None' name='[none:Calculation_889179465331826693:nk]' pivot='key' type='nominal' />
+            <column-instance column='[team]' derivation='None' name='[none:team:nk]' pivot='key' type='nominal' />
+            <column-instance column='[year]' derivation='None' name='[none:year:qk]' pivot='key' type='quantitative' />
+            <column caption='Placement Label' datatype='string' name='[placement_label]' role='dimension' type='nominal' />
+            <column-instance column='[goals_scored_rank]' derivation='Sum' name='[sum:goals_scored_rank:qk]' pivot='key' type='quantitative' />
+            <column caption='Team' datatype='string' name='[team]' role='dimension' type='nominal' />
+            <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' domain-expand='false' field='[federated.05bmbjy0hzogc816c75si07m7xz0].[sum:goals_scored_rank:qk]' field-type='quantitative' reverse='true' scope='rows' type='space' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:team:nk]' />
+              <size column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.05bmbjy0hzogc816c75si07m7xz0].[sum:goals_scored_rank:qk]</rows>
+        <cols>[federated.05bmbjy0hzogc816c75si07m7xz0].[none:year:qk]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='scored spread'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Group Stage Goals Scored</run>
+          </formatted-text>
+        </title>
+        <caption>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana' fontsize='10'>There&apos;s a much weaker relationship between goals scored over the group stage and winning the cup. </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana' fontsize='10'>While teams that win the cup tend to score in the top three at the group-stage, the opposite does not hold.</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana' fontsize='10'>Teams that score the most at the group stage have only one 17% of world cups. </run>
+          </formatted-text>
+        </caption>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='WorldCups' name='federated.05bmbjy0hzogc816c75si07m7xz0' />
+          </datasources>
+          <datasource-dependencies datasource='federated.05bmbjy0hzogc816c75si07m7xz0'>
+            <column caption='Winners' datatype='string' name='[Calculation_889179465331826693]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF ([placement_label] == &quot;winner&quot;) THEN &quot;winner&quot; ELSE &quot;loser&quot; END' />
+            </column>
+            <column caption='Goals Scored' datatype='integer' name='[goals_scored]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_889179465331826693]' derivation='None' name='[none:Calculation_889179465331826693:nk]' pivot='key' type='nominal' />
+            <column-instance column='[team]' derivation='None' name='[none:team:nk]' pivot='key' type='nominal' />
+            <column-instance column='[year]' derivation='None' name='[none:year:qk]' pivot='key' type='quantitative' />
+            <column caption='Placement Label' datatype='string' name='[placement_label]' role='dimension' type='nominal' />
+            <column-instance column='[goals_scored]' derivation='Sum' name='[sum:goals_scored:qk]' pivot='key' type='quantitative' />
+            <column caption='Team' datatype='string' name='[team]' role='dimension' type='nominal' />
+            <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='size' field='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' field-type='nominal' max-size='1' min-size='0.139153' type='catsize' />
+          </style-rule>
+          <style-rule element='refline'>
+            <format attr='fill-above' id='refline0' value='#00000000' />
+            <format attr='fill-below' id='refline0' value='#00000000' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:team:nk]' />
+              <size column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+                <format attr='size' value='1.4892762899398804' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.05bmbjy0hzogc816c75si07m7xz0].[sum:goals_scored:qk]</rows>
+        <cols>[federated.05bmbjy0hzogc816c75si07m7xz0].[none:year:qk]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='winners vs rest'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Cup Winners vs Rest</run>
+          </formatted-text>
+        </title>
+        <caption>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana Pro'>Tournament winner vs average of &apos;losers&apos; for goals scored, goals conceded and points. </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro'>This diagram illustrates the spread previously discussed. With group stage points, we can see the largest and most consistent spread between winners and the rest. </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro'>The spread with group-stage goals scored/conceded shows less consistency over time. </run>
+          </formatted-text>
+        </caption>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='WorldCups' name='federated.05bmbjy0hzogc816c75si07m7xz0' />
+          </datasources>
+          <datasource-dependencies datasource='federated.05bmbjy0hzogc816c75si07m7xz0'>
+            <column caption='Winners' datatype='string' name='[Calculation_889179465331826693]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF ([placement_label] == &quot;winner&quot;) THEN &quot;winner&quot; ELSE &quot;loser&quot; END' />
+            </column>
+            <column-instance column='[goals_conceded]' derivation='Avg' name='[avg:goals_conceded:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[goals_scored]' derivation='Avg' name='[avg:goals_scored:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[points_total]' derivation='Avg' name='[avg:points_total:qk]' pivot='key' type='quantitative' />
+            <column caption='Goals Conceded' datatype='integer' name='[goals_conceded]' role='measure' type='quantitative' />
+            <column caption='Goals Scored' datatype='integer' name='[goals_scored]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_889179465331826693]' derivation='None' name='[none:Calculation_889179465331826693:nk]' pivot='key' type='nominal' />
+            <column-instance column='[year]' derivation='None' name='[none:year:qk]' pivot='key' type='quantitative' />
+            <column caption='Placement Label' datatype='string' name='[placement_label]' role='dimension' type='nominal' />
+            <column caption='Points Total' datatype='integer' name='[points_total]' role='measure' type='quantitative' />
+            <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.05bmbjy0hzogc816c75si07m7xz0].[avg:points_total:qk]' scope='rows' value='Avg Points' />
+            <format attr='title' class='0' field='[federated.05bmbjy0hzogc816c75si07m7xz0].[avg:goals_scored:qk]' scope='rows' value='Avg Scored' />
+            <format attr='title' class='0' field='[federated.05bmbjy0hzogc816c75si07m7xz0].[avg:goals_conceded:qk]' scope='rows' value='Avg Conceded' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' value='Key'>
+              <formatted-text>
+                <run>Key</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' />
+            </encodings>
+          </pane>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.05bmbjy0hzogc816c75si07m7xz0].[avg:points_total:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' />
+            </encodings>
+          </pane>
+          <pane id='3' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.05bmbjy0hzogc816c75si07m7xz0].[avg:goals_scored:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' />
+            </encodings>
+          </pane>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.05bmbjy0hzogc816c75si07m7xz0].[avg:goals_conceded:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>([federated.05bmbjy0hzogc816c75si07m7xz0].[avg:points_total:qk] + ([federated.05bmbjy0hzogc816c75si07m7xz0].[avg:goals_scored:qk] + [federated.05bmbjy0hzogc816c75si07m7xz0].[avg:goals_conceded:qk]))</rows>
+        <cols>[federated.05bmbjy0hzogc816c75si07m7xz0].[none:year:qk]</cols>
+      </table>
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard name='Data 1 DB'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='78750' id='1' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/background2.PNG' type='bitmap' w='101700' x='0' y='-125' />
+        <zone forceUpdate='true' h='3750' id='2' type='text' w='18200' x='30800' y='3375'>
+          <formatted-text>
+            <run fontalignment='1' fontcolor='#000000' fontname='Verdana Pro' fontsize='14' underline='true'>Source Data</run>
+          </formatted-text>
+        </zone>
+        <zone forceUpdate='true' h='53875' id='3' type='text' w='66300' x='3400' y='8750'>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>The source data for this project consists of two open-source data sets:</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>source link: </run>
+            <run auto-url='true' fontcolor='#000000' fontname='Verdana Pro' fontsize='10' hyperlink='tabdoc:load-url url=&amp;quot;https://www.kaggle.com/abecklas/fifa-world-cup&amp;quot;'>https://www.kaggle.com/abecklas/fifa-world-cup</run>
+            <run>Æ&#10;&#10;</run>
+            <run bold='true' fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>WorldCups.csv</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>         *    summary data for each world cup from 1930-2014</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>         *    wide-data format </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>Æ        </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>         *    team placement split over columns such as </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>              &quot;winner&quot;, &quot;runner-up&quot; </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>         *    required gathering into tidy format of placement and value. </run>
+            <run>Æ&#10;&#10;</run>
+            <run bold='true' fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>WorldCupMatches.csv </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>         *   every match, at every world cup, from 1930-2014</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>Æ         </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>         *   wide-data format</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>Æ </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>         *   Performance data hidden in columns like &quot;away goals&quot; </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>Æ </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>         *   Processed to create a table of team group stage performances</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='10'>Æ  </run>
+            <run>Æ&#10;&#10;&#10;&#10;</run>
+          </formatted-text>
+        </zone>
+      </zones>
+    </dashboard>
+    <dashboard name='Data 2 DB'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='85750' id='1' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/background2.PNG' type='bitmap' w='92100' x='600' y='250' />
+        <zone h='26250' id='2' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/worldCup.PNG' type='bitmap' w='58100' x='29100' y='5500' />
+        <zone h='27625' id='3' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/worldcupmatches.PNG' type='bitmap' w='59200' x='28800' y='34125' />
+        <zone forceUpdate='true' h='3750' id='4' type='text' w='17500' x='7000' y='14500'>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='14' underline='true'>WorldCups.csv</run>
+            <run>Æ&#10;</run>
+          </formatted-text>
+        </zone>
+        <zone forceUpdate='true' h='6625' id='5' type='text' w='22700' x='4500' y='46000'>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='14' underline='true'>WorldCupMatches.csv</run>
+            <run>Æ&#10;</run>
+          </formatted-text>
+        </zone>
+      </zones>
+    </dashboard>
+    <dashboard name='Overview DB'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='77375' id='4' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/background1.PNG' type='bitmap' w='91700' x='0' y='-125' />
+        <zone forceUpdate='true' h='48125' id='3' type='text' w='53200' x='1900' y='9750'>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>I&apos;ve spent the last two weeks watching hours</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>of world cup football and punditry. </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>During this time, I noticed that TV pundits are constantly </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>arguing about the importance of the group stage. </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>So when I sat down to plan a data analysis project, </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>I could only think of one question that I wanted to answer. </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>Does the group stage matter beyond reaching the knockouts? </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>I&apos;ve sub-divided this question down into three commonly held opinions about winning the world cup: </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>1. Winning all group stage games is important </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>2. Scoring the most goals over the group stage is important</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>3. Conceding the fewest goals over the group stage is important. </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>I&apos;ll use graphical analysis and statistical tests to show that </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>all three of these beliefs are supported by historical data.</run>
+            <run>Æ&#10;</run>
+          </formatted-text>
+        </zone>
+        <zone forceUpdate='true' h='7750' id='2' type='text' w='52100' x='15200' y='1250'>
+          <formatted-text>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='14' underline='true'>Why I chose to analyse the World Cup group stage</run>
+            <run>Æ&#10;</run>
+          </formatted-text>
+        </zone>
+        <zone h='28375' id='5' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/pundits.PNG' type='bitmap' w='32400' x='55300' y='20750' />
+      </zones>
+    </dashboard>
+    <dashboard name='Processing 1'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='75625' id='1' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/background3.PNG' type='bitmap' w='99300' x='100' y='125' />
+        <zone forceUpdate='true' h='49375' id='2' type='text' w='56100' x='2300' y='8250'>
+          <formatted-text>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11' underline='true'>R version 3.4 (via Rstudio IDE) :</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>Æ </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>Declarative, reproducible and extensive  language </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>Powerful </run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11' italic='true'> gather  </run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>and </run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11' italic='true'>mutate</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'> functionality </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11' underline='true'>R  tasks:</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>    *Covert world cup summary data to placements </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>    *Covert match data to group stage totals </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>    *Create new fields like &apos;result&apos; and &apos;goals scored/conceded&apos;</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>    * Data saved to flat file (could be gsheet, sqllite, Redshift etc)</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11' underline='true'>Tableau version 9.23:</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>Æ </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>Can handle simple operations (split, calc columns etc). </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>Uses a similar functional language to Excel Macros</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>UI presents join operations clearly </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11' underline='true'>Tableau tasks: </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>  * Join group points and final placement datasets together </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>  * Fill in Null values created by join </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#1b1b1b' fontname='Verdana Pro' fontsize='11'>  * Create groupings such as &quot;winner&quot; or &quot;finalist&quot;</run>
+          </formatted-text>
+        </zone>
+        <zone forceUpdate='true' h='3750' id='3' type='text' w='30100' x='31900' y='3875'>
+          <formatted-text>
+            <run fontalignment='1' fontcolor='#000000' fontname='Verdana' fontsize='14' underline='true'>Data Processing Overview </run>
+          </formatted-text>
+        </zone>
+        <zone h='20875' id='4' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/tableau.png' type='bitmap' w='23900' x='69700' y='37875' />
+        <zone h='21750' id='5' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/rstudio.png' type='bitmap' w='19400' x='73200' y='10250' />
+      </zones>
+    </dashboard>
+    <dashboard name='Processing 2'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='99750' id='1' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/background3.PNG' type='bitmap' w='99700' x='300' y='625' />
+        <zone forceUpdate='true' h='39875' id='2' type='text' w='47000' x='25800' y='9500'>
+          <formatted-text>
+            <run fontalignment='1' fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>I will now run you through the R project </run>
+            <run fontalignment='1'>Æ&#10;&#10;</run>
+            <run fontalignment='1' fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>I&apos;ve created a series of R markdown files </run>
+            <run fontalignment='1'>Æ&#10;</run>
+            <run fontalignment='1' fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>that act as both my source code and documentation. </run>
+            <run fontalignment='1'>Æ&#10;&#10;</run>
+            <run fontalignment='1' fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>This project is open-access and available on my Github page. </run>
+            <run fontalignment='1'>Æ&#10;</run>
+            <run auto-url='true' fontalignment='1' fontcolor='#000000' fontname='Verdana Pro' fontsize='11' hyperlink='tabdoc:load-url url=&amp;quot;https://github.com/alfie-bae/World-Cup-Analysis-&amp;quot;'>https://github.com/alfie-bae/World-Cup-Analysis-</run>
+            <run fontalignment='1'>Æ&#10;&#10;</run>
+          </formatted-text>
+        </zone>
+        <zone forceUpdate='true' h='6125' id='3' type='text' w='33800' x='32600' y='3875'>
+          <formatted-text>
+            <run fontalignment='1' fontcolor='#000000' fontname='Verdana Pro' fontsize='14' underline='true'>Data Processing Overview 2 </run>
+          </formatted-text>
+        </zone>
+      </zones>
+    </dashboard>
+    <dashboard name='Processing 3'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='75500' id='1' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/background3.PNG' type='bitmap' w='99800' x='300' y='625' />
+        <zone forceUpdate='true' h='39875' id='2' type='text' w='54000' x='5200' y='11125'>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>My review of data processing in Tableau</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>Good:</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'> * Ui represents joins well</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'> * Create fields while conducting analysis (in worksheet)</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'> * Dates parsed regardless of format (</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11' italic='true'>really big deal</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>)</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>Bad:</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>  * grouping and ranking (group-by wasn&apos;t in Tab until version 9.1)</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>  * creating complex calculated fields (won, loss) </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>  * visualising intermediary products </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>  * checking data with quick operations</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>With the data processed and loaded into Tableau,</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>Let&apos;s look at the relationship between group stage points</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>and winning the world cup</run>
+            <run>Æ&#10;</run>
+          </formatted-text>
+        </zone>
+        <zone forceUpdate='true' h='6125' id='3' type='text' w='32500' x='34000' y='4500'>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='14' underline='true'>Data Processing Overview 3 </run>
+          </formatted-text>
+        </zone>
+      </zones>
+    </dashboard>
+    <dashboard name='Story 1' type='storyboard'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Presentation overview&#10;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <style />
+      <size maxheight='964' maxwidth='1016' minheight='964' minwidth='1016' />
+      <zones>
+        <zone h='100000' id='2' type='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98340' id='1' param='vert' removable='false' type='layout-flow' w='98426' x='787' y='830'>
+            <zone h='3423' id='3' type='title' w='98426' x='787' y='830' />
+            <zone h='10477' id='4' is-fixed='true' paired-zone-id='5' removable='false' type='flipboard-nav' w='98426' x='787' y='4253' />
+            <zone h='84440' id='5' paired-zone-id='4' removable='false' type='flipboard' w='98426' x='787' y='14730'>
+              <flipboard active-id='10' nav-type='caption' show-nav-arrows='true'>
+                <story-points>
+                  <story-point caption='Title ' captured-sheet='Title DB' id='4'>
+                    <capturedDeltas>
+                      <dashboard name='Title DB'>
+                        <zone id='4'>
+                          <formatted-text>
+                            <run fontalignment='1'>Æ&#10;</run>
+                            <run fontalignment='1' fontcolor='#000000' fontname='Verdana Pro' fontsize='16'>World Cup Analysis</run>
+                            <run fontalignment='1'>Æ&#10;&#10;</run>
+                            <run fontalignment='1' fontcolor='#000000' fontname='Verdana Pro' fontsize='16'>Does the group stage determine the winner? </run>
+                          </formatted-text>
+                        </zone>
+                      </dashboard>
+                    </capturedDeltas>
+                  </story-point>
+                  <story-point caption='Why I chose the title question' captured-sheet='Overview DB' id='24' />
+                  <story-point caption='Source Data 1' captured-sheet='Data 1 DB' id='5' />
+                  <story-point caption='Source Data 2' captured-sheet='Data 2 DB' id='6' />
+                  <story-point caption='Processing 1' captured-sheet='Processing 1' id='7' />
+                  <story-point caption='Processing 2' captured-sheet='Processing 2' id='8' />
+                  <story-point caption='Processing 3' captured-sheet='Processing 3' id='9' />
+                  <story-point caption='Points 1' captured-sheet='points_total_spread' id='10' />
+                  <story-point caption='Points 2' captured-sheet='points_rank' id='11' />
+                  <story-point caption='Goals Scored 1' captured-sheet='scored spread' id='12' />
+                  <story-point caption='Goals Scored 2' captured-sheet='scored rank' id='13' />
+                  <story-point caption='Goals Conceded 1' captured-sheet='conceded spread' id='14' />
+                  <story-point caption='Goals Conceded 2' captured-sheet='conceded rank' id='15' />
+                  <story-point caption='Winners vs Losers' captured-sheet='winners vs rest' id='16' />
+                  <story-point caption='Stats 1' captured-sheet='stats 1' id='17' />
+                  <story-point caption='Stats 2' captured-sheet='stats 2' id='18' />
+                  <story-point caption='Limitations ' captured-sheet='limitations' id='19' />
+                  <story-point caption='Summary' captured-sheet='Summary' id='20' />
+                  <story-point caption='Acknowledgements' captured-sheet='acknowledgements' id='21' />
+                  <story-point captured-sheet='Overview DB' id='23' />
+                  <story-point captured-sheet='' id='25' />
+                </story-points>
+              </flipboard>
+            </zone>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+      </zones>
+    </dashboard>
+    <dashboard name='Summary'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='78125' id='1' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/background2.PNG' type='bitmap' w='84100' x='800' y='1625' />
+        <zone forceUpdate='true' h='51250' id='2' type='text' w='58700' x='2600' y='9875'>
+          <formatted-text>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* Teams that win their group are more likely to win </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>the tournament than all others.</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* Teams that get the most points of all groups </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>are the most likely to win  the cup. </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* Group stage goals scored is a strong positive indicator </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>for cup success.</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* Group stage goals conceded is a strong negative indicator</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>for cup success.</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* Evidence is stronger for the relationship between</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>group points and winning the cup than between</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>goals scored/conceded.</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>*Goals scored/conceded may be co-variates that are produced</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>as symptoms of winning points rather than lead variables.</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>*Analysis required assumptions about the format </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>of the group stage over time. </run>
+          </formatted-text>
+        </zone>
+        <zone forceUpdate='true' h='5375' id='3' type='text' w='17600' x='31700' y='4250'>
+          <formatted-text>
+            <run fontalignment='1' fontcolor='#000000' fontname='Verdana Pro' fontsize='14' underline='true'>Project Summary</run>
+          </formatted-text>
+        </zone>
+      </zones>
+    </dashboard>
+    <dashboard name='Title DB'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='100000' id='2' type='layout-basic' w='100000' x='0' y='0'>
+          <zone forceUpdate='true' h='98000' id='1' type='text' w='98400' x='800' y='1000'>
+            <formatted-text>
+              <run>Æ&#10;</run>
+            </formatted-text>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+        <zone h='95750' id='3' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/title_image.jpg' type='bitmap' w='97400' x='2200' y='1875' />
+        <zone h='19750' id='4' type='text' w='59600' x='20000' y='2625'>
+          <formatted-text>
+            <run fontalignment='1'>Æ&#10;</run>
+            <run fontalignment='1' fontcolor='#1b1b1b' fontname='Verdana Pro Cond' fontsize='26'>Debunking World Cup Myths </run>
+            <run fontalignment='1'>Æ&#10;&#10;</run>
+            <run fontalignment='1' fontcolor='#1b1b1b' fontname='Verdana Pro Cond' fontsize='26'>Alfie Rae Smith </run>
+          </formatted-text>
+        </zone>
+      </zones>
+    </dashboard>
+    <dashboard name='acknowledgements'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='78125' id='1' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/background2.PNG' type='bitmap' w='84100' x='800' y='1625' />
+        <zone forceUpdate='true' h='40000' id='2' type='text' w='59100' x='2900' y='12875'>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>IMAGES:</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>Flickr Creative Commons </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>link:</run>
+            <run auto-url='true' fontcolor='#000000' fontname='Verdana Pro' fontsize='11' hyperlink='tabdoc:load-url url=&amp;quot;https://www.flickr.com/creativecommons/&amp;quot;'>https://www.flickr.com/creativecommons/</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>BBC SPORT </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>link:</run>
+            <run auto-url='true' fontcolor='#000000' fontname='Verdana Pro' fontsize='11' hyperlink='tabdoc:load-url url=&amp;quot;https://www.bbc.co.uk/sport/football&amp;quot;'>https://www.bbc.co.uk/sport/football</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>DATA:</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>Kaggle</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>link:</run>
+            <run>Æ&#10;</run>
+            <run auto-url='true' fontcolor='#000000' fontname='Verdana Pro' fontsize='11' hyperlink='tabdoc:load-url url=&amp;quot;https://www.kaggle.com/abecklas/fifa-world-cup&amp;quot;'>https://www.kaggle.com/abecklas/fifa-world-cup</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>SOFTWARE:</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>The R project group:</run>
+            <run>Æ&#10;</run>
+            <run auto-url='true' fontcolor='#000000' fontname='Verdana Pro' fontsize='11' hyperlink='tabdoc:load-url url=&amp;quot;https://www.r-project.org/contributors.html&amp;quot;'>https://www.r-project.org/contributors.html</run>
+            <run>Æ&#10;&#10;&#10;</run>
+          </formatted-text>
+        </zone>
+        <zone forceUpdate='true' h='3750' id='3' type='text' w='23000' x='33000' y='6125'>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='14' underline='true'>Acknowledgements</run>
+          </formatted-text>
+        </zone>
+      </zones>
+    </dashboard>
+    <dashboard name='limitations'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='78125' id='1' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/background2.PNG' type='bitmap' w='84100' x='800' y='1625' />
+        <zone forceUpdate='true' h='53875' id='2' type='text' w='49700' x='3300' y='7500'>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11' underline='true'>Dodgy Assumptions:</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* Only group-stage performance is relevant (qualify/last 16)</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* Three points for win only introduced after 1982</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* Goal difference decided group winners (used to break ties)</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* Group stage format remained constant over time </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11' underline='true'>Possible Confounding Variables:</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>goals scored and goals conceded in group stage</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>are both likely co-variate with group ranking and points.  </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>Next iteration of analysis should strip wins from</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>goals scored to identify the lead factor. </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11' underline='true'>Further analysis:</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* confounding variable analysis </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* caps in team </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* results at previous tournamet (Germany 2014-2018)</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* results in qualifying </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* number of teams in group (48 team world cup in 2022)</run>
+          </formatted-text>
+        </zone>
+        <zone h='20500' id='3' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/germany2014.PNG' type='bitmap' w='29200' x='53100' y='12250' />
+        <zone h='21125' id='4' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/germany2018.PNG' type='bitmap' w='27300' x='53100' y='38875' />
+        <zone h='3750' id='5' type='text' w='27000' x='27100' y='3375'>
+          <formatted-text>
+            <run fontalignment='1' fontcolor='#000000' fontname='Verdana Pro' fontsize='14' underline='true'>Reasons to be skeptical </run>
+          </formatted-text>
+        </zone>
+      </zones>
+    </dashboard>
+    <dashboard name='stats 1'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='78125' id='1' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/background2.PNG' type='bitmap' w='84200' x='800' y='1625' />
+        <zone forceUpdate='true' h='49625' id='3' type='text' w='50600' x='3400' y='9375'>
+          <formatted-text>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>I used Spearman&apos;s correlation test to estimate the causality between  three group stage and two cup level performance measures.</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>Group-stage performance measures:</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* goals scored - discrete - goals scored over group stage</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* goals conceded - discrete - goals conceded over group stage</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* points awarded - discrete - points won over group stage</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>Cup-level peformance measures:</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* winner  - binary - 1 if team won at world cup</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>* top four -  binary - 1 if team reached final or semi-final. </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>I also used a Student&apos;s T-test to estimate the likelhood</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>that any of the correlation found resulted from chance. </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>All tests were run and compiled in R. The source code can be found within project file </run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11' italic='true'>tests/t_tests.R</run>
+            <run>Æ&#10;&#10;</run>
+          </formatted-text>
+        </zone>
+        <zone forceUpdate='true' h='2500' id='4' type='text' w='30300' x='23100' y='6000'>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='14' underline='true'>Statistical Tests - Overview </run>
+          </formatted-text>
+        </zone>
+        <zone h='23250' id='5' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/worldcup.jpg' type='bitmap' w='22300' x='58900' y='34000' />
+        <zone h='31750' id='6' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/bbcsport.PNG' type='bitmap' w='26800' x='56400' y='12875' />
+      </zones>
+    </dashboard>
+    <dashboard name='stats 2'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='78125' id='1' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/background2.PNG' type='bitmap' w='84100' x='800' y='1625' />
+        <zone h='23375' id='2' is-centered='0' is-scaled='1' param='C:/Users/Alfie/git_repos/World-Cup-Analysis-/presentation/images/stats1.PNG' type='bitmap' w='38400' x='43800' y='18000' />
+        <zone forceUpdate='true' h='7625' id='3' type='text' w='29500' x='24100' y='5250'>
+          <formatted-text>
+            <run fontalignment='1' fontcolor='#000000' fontname='Verdana Pro' fontsize='14' underline='true'>Statistical Tests - Results</run>
+          </formatted-text>
+        </zone>
+        <zone forceUpdate='true' h='41500' id='4' type='text' w='40400' x='2800' y='13125'>
+          <formatted-text>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>All group stage performance measures correlate </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>strongly with world-cup performance </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>Teams that win the most points and/or score </run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>the most goals over the group stage are</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>overwhelmingly likely to win the world cup. </run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>Teams that concede the most goals are the least</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>likely to win the world cup.</run>
+            <run>Æ&#10;&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>There&apos;s less than a percent chance of any result</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>being down to chance as all correlation found</run>
+            <run>Æ&#10;</run>
+            <run fontcolor='#000000' fontname='Verdana Pro' fontsize='11'>passed the 1% level t-test. </run>
+            <run>Æ&#10;&#10;</run>
+          </formatted-text>
+        </zone>
+      </zones>
+    </dashboard>
+  </dashboards>
+  <windows source-height='51'>
+    <window class='dashboard' name='Story 1'>
+      <viewpoints />
+      <active id='5' />
+    </window>
+    <window class='dashboard' name='Title DB'>
+      <viewpoints />
+      <active id='3' />
+    </window>
+    <window class='dashboard' name='Overview DB'>
+      <viewpoints />
+      <active id='-1' />
+    </window>
+    <window class='dashboard' name='Data 1 DB'>
+      <viewpoints />
+      <active id='1' />
+    </window>
+    <window class='dashboard' name='Data 2 DB'>
+      <viewpoints />
+      <active id='-1' />
+    </window>
+    <window class='dashboard' name='Processing 1'>
+      <viewpoints />
+      <active id='1' />
+    </window>
+    <window class='dashboard' name='Processing 2'>
+      <viewpoints />
+      <active id='1' />
+    </window>
+    <window class='dashboard' name='Processing 3'>
+      <viewpoints />
+      <active id='1' />
+    </window>
+    <window class='worksheet' maximized='true' name='points_total_spread'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='5' param='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' type='size' />
+          </strip>
+        </edge>
+        <edge name='bottom'>
+          <strip size='2147483647'>
+            <card type='caption' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+    </window>
+    <window class='worksheet' name='points_rank'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' type='size' />
+          </strip>
+        </edge>
+        <edge name='bottom'>
+          <strip size='117'>
+            <card type='caption' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+    <window class='worksheet' name='scored spread'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='5' param='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' type='size' />
+          </strip>
+        </edge>
+        <edge name='bottom'>
+          <strip size='102'>
+            <card type='caption' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+    </window>
+    <window class='worksheet' name='scored rank'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' type='size' />
+          </strip>
+        </edge>
+        <edge name='bottom'>
+          <strip size='117'>
+            <card type='caption' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+    <window class='worksheet' name='conceded spread'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='5' param='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' type='size' />
+          </strip>
+        </edge>
+        <edge name='bottom'>
+          <strip size='131'>
+            <card type='caption' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+    </window>
+    <window class='worksheet' name='conceded rank'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' type='size' />
+          </strip>
+        </edge>
+        <edge name='bottom'>
+          <strip size='117'>
+            <card type='caption' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+    <window class='worksheet' name='winners vs rest'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='1' param='[federated.05bmbjy0hzogc816c75si07m7xz0].[none:Calculation_889179465331826693:nk]' type='color' />
+          </strip>
+        </edge>
+        <edge name='bottom'>
+          <strip size='127'>
+            <card type='caption' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+    <window class='dashboard' name='stats 1'>
+      <viewpoints />
+      <active id='-1' />
+    </window>
+    <window class='dashboard' name='stats 2'>
+      <viewpoints />
+      <active id='-1' />
+    </window>
+    <window class='dashboard' name='limitations'>
+      <viewpoints />
+      <active id='-1' />
+    </window>
+    <window class='dashboard' name='Summary'>
+      <viewpoints />
+      <active id='-1' />
+    </window>
+    <window class='dashboard' name='acknowledgements'>
+      <viewpoints />
+      <active id='-1' />
+    </window>
+  </windows>
+</workbook>
